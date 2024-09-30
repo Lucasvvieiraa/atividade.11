@@ -3,7 +3,7 @@ $host = 'localhost';
 $db = 'crud_dupla11';
 $user = 'root';
 $pass = 'root';
-
+arrume
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

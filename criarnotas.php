@@ -1,16 +1,19 @@
 <?php
+include 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titulo = $_POST['titulo'];
     $conteudo = $_POST['conteudo'];
+    $usuario_id = $_POST['usuario_id']; 
 
-    inserirNota($conn, $titulo, $conteudo);
+    $stmt = $conn->prepare("INSERT INTO nota (titulo, conteudo, usuario_id) VALUES (?, ?, ?)");
+    $stmt->execute([$titulo, $conteudo, $usuario_id]);
 
-    header('Location: index.php'); // Substitua 'index.php' pelo nome da sua página principal
+    header('Location: index.php');
     exit;
 }
-
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,11 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="text" id="titulo" name="titulo" required>
 
         <label for="conteudo">Conteúdo:</label>
-        <textarea id="conteudo" name="conteudo"   
- required></textarea>
+        <textarea id="conteudo" name="conteudo" required></textarea>
 
+        <input type="hidden" name="usuario_id" value="1"> 
         <button type="submit">Salvar</button>
-    </form>   
-
+    </form>  
 </body>
 </html>

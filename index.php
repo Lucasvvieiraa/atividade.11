@@ -1,17 +1,33 @@
 <?php
-include 'include.php';
+include 'db.php'; 
 
-$notas = listarNotas($conn);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $titulo = $_POST['titulo'];
+    $conteudo = $_POST['conteudo'];
+    $usuario_id = 1; 
+
+    $stmt = $conn->prepare("INSERT INTO nota (titulo, conteudo, usuario_id) VALUES (?, ?, ?)");
+    $stmt->execute([$titulo, $conteudo, $usuario_id]);
+
+    header('Location: index.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bloco de Notas</title>
+    <title>Criar Nova Nota</title>
 </head>
 <body>
-    <h1>Suas Notas</h1>
-    <a href="create.php">Criar Nova Nota</a>
-    <table>
-        </table>
+    <h1>Criar Nova Nota</h1>
+    <form method="POST">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" required>
+
+        <label for="conteudo">Conteúdo:</label>
+        <textarea id="conteudo" name="conteudo" required></textarea>
+
+        <button type="submit">Salvar</button>
+    </form>  
 </body>
 </html>
