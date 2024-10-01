@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <input type="hidden" name="usuario_id" value="1"> 
         <button type="submit">Salvar</button>
+        
     </form>  
 </body>
 </html>

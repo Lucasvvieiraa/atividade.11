@@ -6,8 +6,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conteudo = $_POST['conteudo'];
     $usuario_id = 1; 
 
-    $stmt = $conn->prepare("INSERT INTO nota (titulo, conteudo, usuario_id) VALUES (?, ?, ?)");
-    $stmt->execute([$titulo, $conteudo, $usuario_id]);
+    $stmt = $conn->prepare("INSERT INTO nota (titulo, conteudo) VALUES (?, ?)");
+    $stmt->execute([$titulo, $conteudo,]);
 
     header('Location: index.php');
     exit;
